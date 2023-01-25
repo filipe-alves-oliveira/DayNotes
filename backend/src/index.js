@@ -3,11 +3,9 @@
 
 const express = require('express'); //require = import do node 
 const app = express();
-
-require 
+require ('./config/dbConfig');
 
 app.use(express.json()); //recurso q vai utilizar json nas requisiçoes.
-
 
 app.get('/', (request, response) => {
     return response.json({
