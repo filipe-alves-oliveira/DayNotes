@@ -3,10 +3,12 @@
 const express = require('express');
 const routes = express.Router();
 
-const AnnotationController = require('./controllers/AnnotationController')
+const AnnotationController = require('./controllers/AnnotationController');
+const PriorityController = require('./controllers/PriorityController');
 
 routes.post('/annotations', AnnotationController.create); //Rota Annotations
 routes.get('/annotations', AnnotationController.read);
 routes.delete('/annotations/:id', AnnotationController.delete);
+routes.get('./priorities', PriorityController.read);  //Rota de prioridade
 
 module.exports = routes;

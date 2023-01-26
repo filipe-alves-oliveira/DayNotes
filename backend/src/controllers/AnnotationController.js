@@ -32,8 +32,7 @@ module.exports = {
         if (annotationDeleted) {
             return response.json(annotationDeleted);
         }
-        
-        return response.status(401).json({ error: 'Não foi encontrado o registro para deletar!'});
-    }
 
+        return response.status(401).json({ error: "Não foi encontrado o registro para deletar!"});
+    }
 }
