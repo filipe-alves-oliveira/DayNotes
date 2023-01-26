@@ -6,5 +6,7 @@ const AnnotationDataSchema = new mongoose.Schema({
     priority: Boolean,
 });
 
+mongoose.set('strictQuery', true);
+
 module.exports = mongoose.model('Annotations', AnnotationDataSchema); // atribuind a estrutura do model com o nome annotation //exportar para ser visivel para todo node.js 
 
