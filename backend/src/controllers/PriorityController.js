@@ -1,31 +1,30 @@
-const Annotations = require('../models/AnnotationData');
+const Annotations = require("../models/AnnotationData");
 
-module.exports = { //pt2-12:00
-    async read(request, response){
-        const priority = request.query;
+module.exports = {
+  //pt2-12:00
+  async read(request, response) {
+    const priority = request.query;
 
-        const priorityNotes = await Annotations.find(priority);
+    const priorityNotes = await Annotations.find(priority);
 
-        return response.json(priorityNotes);
-    },
-    
-    async update(request, response) {
-        const { id } = request.params;
+    return response.json(priorityNotes);
+  },
 
-        const annotation = await Annotations.findOne({ _id: id});
+  async update(request, response) {
+    const { id } = request.params;
 
-        if (annotation.priority) {
-            annotation.priority = false;
-        }else{
-            annotation.priority = true;
-        }
+    const annotation = await Annotations.findOne({ _id: id });
 
-        await annotation.save();
-
-        return response.json(annotation)
+    if (annotation.priority) {
+      annotation.priority = false;
+    } else {
+      annotation.priority = true;
     }
-}
 
-   
+    await annotation.save();
+
+    return response.json(annotation);
+  },
+};
 
 //query - informacao especifica q qr q a rota busque.
