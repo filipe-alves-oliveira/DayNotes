@@ -1,4 +1,3 @@
-const { update } = require('../models/AnnotationData');
 const Annotations = require('../models/AnnotationData');
 
 module.exports = { //pt2-12:00
