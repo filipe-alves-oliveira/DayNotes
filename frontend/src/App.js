@@ -1,16 +1,28 @@
-import React from 'react';
- 
+import React from "react";
 
 function App() {
   return (
-    <h1>Day Notes</h1>
+    <div id="app">
+      <aside>
+        <strong>Caderno de Notas</strong>
+        <form>
+          <div className="input-block">
+            <label htmlFor="title">Titulo da anotação</label>
+            <input />
+          </div>
+          <div className="input-block">
+            <label htmlFor="nota">Anotações</label>
+            <textarea></textarea>
+          </div>
+          <button type="submit">Salvar</button>
+        </form>
+      </aside>
+      <main></main>
+    </div>
   );
 }
 
 export default App;
-
-
-
 
 //component - estrutura de cod q retorna algo, app é um component - usar somente 1 component por aquivo. Estrutua de cod q retorna html, css e js.
 //props - atributos passados dentro de um component <Header title=filipe /> Informacoes q um component pai passa para um component filho
