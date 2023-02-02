@@ -1,4 +1,6 @@
 import React from "react";
+import './global.css';
+import './sidebar.css';
 
 function App() {
   return (
