@@ -1,24 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import './app.css';
 import './global.css';
 import './sidebar.css';
 import './main.css';
 
 import Notes from './Components/Notes'
+import api from './services/api'
+import e from "express";
 
 function App() {
+  const [ title, setTitles ] = useState('')
+  const [ notes, setNotes ] = useState('')
+
+//SPA - n precisa q a pagina seja atualizada - preventDefault nao tem o comportamento padrao
+//async - tempo necessario q precisa para fazer chamada mas nao interfira no resto do codigo 
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const response = await api.post('/annotations', {
+      title,
+      notes,
+      priority: false
+    })
+
+  } 
+
   return (
     <div id="app">
       <aside>
         <strong>Caderno de Notas</strong>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-block">
             <label htmlFor="title">Titulo da anotação</label>
-            <input />
+            <input 
+              required
+              value={title}
+              onChange={e => setTitles(e.target.value)} 
+            />
           </div>
           <div className="input-block">
             <label htmlFor="nota">Anotações</label>
-            <textarea></textarea>
+            <textarea 
+              required
+              value={notes}
+              onChange={e => setNotes(e.target.value)}
+            />
           </div>
           <button type="submit">Salvar</button>
         </form>
