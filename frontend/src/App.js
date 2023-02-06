@@ -6,7 +6,6 @@ import './main.css';
 
 import Notes from './Components/Notes'
 import api from './services/api'
-import e from "express";
 
 function App() {
   const [ title, setTitles ] = useState('')
