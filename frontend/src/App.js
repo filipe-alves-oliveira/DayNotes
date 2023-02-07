@@ -1,29 +1,43 @@
-import React, { useState } from "react";
-import './app.css';
-import './global.css';
-import './sidebar.css';
-import './main.css';
+import React, { useState, useEffect } from "react";
+import "./app.css";
+import "./global.css";
+import "./sidebar.css";
+import "./main.css";
 
-import Notes from './Components/Notes'
-import api from './services/api'
+import Notes from "./Components/Notes";
+import api from "./services/api";
 
 function App() {
-  const [ title, setTitles ] = useState('')
-  const [ notes, setNotes ] = useState('')
+  const [title, setTitles] = useState("");
+  const [notes, setNotes] = useState("");
+  const [allNotes, setAllNotes] = useState([""]); //como esta manipulando info precisa criar dentro de um estado
 
-//SPA - n precisa q a pagina seja atualizada - preventDefault nao tem o comportamento padrao
-//async - tempo necessario q precisa para fazer chamada mas nao interfira no resto do codigo 
+  //SPA - n precisa q a pagina seja atualizada - preventDefault nao tem o comportamento padrao
+  //async - tempo necessario q precisa para fazer chamada mas nao interfira no resto do codigo
+
+  useEffect(() => {
+    async function getAllNotes() {
+      const response = await api.get("/annotations");
+
+      setAllNotes(response.data);
+    }
+
+    getAllNotes();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const response = await api.post('/annotations', {
+    const response = await api.post("/annotations", {
       title,
       notes,
-      priority: false
-    })
+      priority: false,
+    });
+    setTitles("");
+    setNotes("");
 
-  } 
+    setAllNotes([...allNotes, response.data]) //setar de forma automatica a listagem de notas
+  }
 
   return (
     <div id="app">
@@ -32,18 +46,18 @@ function App() {
         <form onSubmit={handleSubmit}>
           <div className="input-block">
             <label htmlFor="title">Titulo da anotação</label>
-            <input 
+            <input
               required
               value={title}
-              onChange={e => setTitles(e.target.value)} 
+              onChange={(e) => setTitles(e.target.value)}
             />
           </div>
           <div className="input-block">
             <label htmlFor="nota">Anotações</label>
-            <textarea 
+            <textarea
               required
               value={notes}
-              onChange={e => setNotes(e.target.value)}
+              onChange={(e) => setNotes(e.target.value)}
             />
           </div>
           <button type="submit">Salvar</button>
@@ -51,10 +65,9 @@ function App() {
       </aside>
       <main>
         <ul>
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
+          {allNotes.map((data) => (
+            <Notes data={data} />
+          ))}
         </ul>
       </main>
     </div>
@@ -66,4 +79,3 @@ export default App;
 //component - estrutura de cod q retorna algo, app é um component - usar somente 1 component por aquivo. Estrutua de cod q retorna html, css e js.
 //props - atributos passados dentro de um component <Header title=filipe /> Informacoes q um component pai passa para um component filho
 //estado - uma informacao q o component vai armazenar e manipular essa info, armazena uma informacao dentro de uma var q eu mesmo defino o nome e uma function q seta a variavel, guardando a info anterior e cria uma nova .
-
