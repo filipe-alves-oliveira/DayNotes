@@ -39,6 +39,18 @@ function App() {
     setAllNotes([...allNotes, response.data]) //setar de forma automatica a listagem de notas
   }
 
+  //botao salvar title, ou notes editado, usada somente em uma situacao especifica
+  useEffect(() => {
+    function enableSubmitButton(){
+      let btn = document.getElementById("btn_submit")
+      btn.style.background = "#FFD3CA"
+      if(title && notes){
+        btn.style.background = "#EB87A"
+      }
+    }
+    enableSubmitButton()
+  }, [title, notes])//dependencia
+
   return (
     <div id="app">
       <aside>
@@ -60,7 +72,7 @@ function App() {
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>
-          <button type="submit">Salvar</button>
+          <button id="btn_submit" type="submit">Salvar</button>
         </form>
       </aside>
       <main>

@@ -1,7 +1,7 @@
 import  React from 'react'
 
 function Notes({ data }) {
-  console.log(data.notes)
+  console.log(data.notes);
     return (
         <>
         <li className="notepad-infos">
