@@ -19,10 +19,8 @@ function App() {
   useEffect(() => {
     async function getAllNotes() {
       const response = await api.get("/annotations");
-
       setAllNotes(response.data);
     }
-
     getAllNotes();
   }, []);
 
@@ -42,7 +40,7 @@ function App() {
 
   //botao salvar title, ou notes editado, usada somente em uma situacao especifica
   useEffect(() => {
-    function enableSubmitButton(){
+    function enableSubmitButton() {
       let btn = document.getElementById("btn_submit")
       btn.style.background = "#FFD3CA"
       if(title && notes){
@@ -50,7 +48,7 @@ function App() {
       }
     }
     enableSubmitButton()
-  }, [title, notes])//dependencia
+  }, [title, notes]) //dependencia
 
   return (
     <div id="app">
@@ -61,6 +59,7 @@ function App() {
             <label htmlFor="title">Titulo da anotação</label>
             <input
               required
+              maxLength="30"
               value={title}
               onChange={(e) => setTitles(e.target.value)}
             />

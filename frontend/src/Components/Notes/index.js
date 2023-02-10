@@ -4,7 +4,7 @@ import './style.css'
 import "./styles-priority.css";
 
 function Notes({ data }) {
-  console.log(data.notes);
+  console.log(data)
     return (
         <>
         <li className={data.priority ? "notepad-infos-priority" : "notepad-infos"}>
