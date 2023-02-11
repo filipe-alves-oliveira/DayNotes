@@ -34,7 +34,6 @@ function App() {
     });
     setTitles("");
     setNotes("");
-
     setAllNotes([...allNotes, response.data]) //setar de forma automatica a listagem de notas
   }
 
