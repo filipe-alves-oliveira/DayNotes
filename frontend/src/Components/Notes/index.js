@@ -4,7 +4,7 @@ import './style.css'
 import "./styles-priority.css";
 import api from '../../services/api';
 
-function Notes({ data, handleDelete }) {
+function Notes({ data, handleDelete, handleChangePriority }) {
   const [changedNote, setChangedNote] = useState('')
 
   function handleEdit(e, priority) {
@@ -24,7 +24,7 @@ function Notes({ data, handleDelete }) {
     if(changedNote && changedNote !== notes) {
       await api.post(`/contents/${data._id}`, {
       notes: changedNote,
-    })                                      //AULA 06 - 12MIN.
+    })                                      //AULA 06 - 47:42MIN.
   }
 }
 
@@ -48,7 +48,10 @@ function Notes({ data, handleDelete }) {
                 onBlur ={e => handleSave(e.target, data.notes)} //qdo desfoca, qdo clica fora ele deixa de estar ativo o elemento ativo, qdo deixa de estar ativo ele executa uma acao
                 />
               <span>
-                <AiOutlineExclamationCircle size="20"/>
+                <AiOutlineExclamationCircle 
+                size="20"
+                onClick={() => handleChangePriority(data._id)}
+                />
               </span>
             </li>
         </>

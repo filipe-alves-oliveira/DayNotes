@@ -17,18 +17,27 @@ function App() {
   //async - tempo necessario q precisa para fazer chamada mas nao interfira no resto do codigo
 
   useEffect(() => {
-    async function getAllNotes() {
-      const response = await api.get("/annotations");
-      setAllNotes(response.data);
-    }
-    getAllNotes();
-  }, []);
+  getAllNotes();
+}, [])
+
+async function getAllNotes() {
+  const response = await api.get("/annotations");
+  setAllNotes(response.data);
+}
 
   async function handleDelete(id){
     const deleteNote = await api.delete(`/annotations/${id}`);
 
     if(deleteNote) {
       setAllNotes(allNotes.filter(note => note._id !== id))
+    }
+  }
+
+  async function handleChangePriority(id){
+    const priorityNote = await api.post(`/priorities/${id}`);
+
+    if(priorityNote) {
+      getAllNotes();
     }
   }
 
@@ -89,7 +98,8 @@ function App() {
             <Notes 
             key={data._id}
             data={data}
-            handleDelete={handleDelete} //passando para o componente notes q esta no index por props.
+            handleDelete={handleDelete}
+            handleChangePriority={handleChangePriority} //passando para o componente notes q esta no index por props.
             />
           ))}
         </ul>
