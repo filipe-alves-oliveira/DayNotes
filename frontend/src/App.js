@@ -24,6 +24,14 @@ function App() {
     getAllNotes();
   }, []);
 
+  async function handleDelete(id){
+    const deleteNote = await api.delete(`/annotations/${id}`);
+
+    if(deleteNote) {
+      setAllNotes(allNotes.filter(note => note._id !== id))
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -78,7 +86,11 @@ function App() {
       <main>
         <ul>
           {allNotes.map((data) => (
-            <Notes data={data} />
+            <Notes 
+            key={data._id}
+            data={data}
+            handleDelete={handleDelete} //passando para o componente notes q esta no index por props.
+            />
           ))}
         </ul>
       </main>

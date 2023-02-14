@@ -4,7 +4,7 @@ import './style.css'
 import "./styles-priority.css";
 import api from '../../services/api';
 
-function Notes({ data }) {
+function Notes({ data, handleDelete }) {
   const [changedNote, setChangedNote] = useState('')
 
   function handleEdit(e, priority) {
@@ -35,7 +35,10 @@ function Notes({ data }) {
               <div>
                 <strong>{data.title}</strong>
                 <div>
-                  <AiTwotoneDelete size="20"/>
+                  <AiTwotoneDelete 
+                  size="20" 
+                  onClick={() => handleDelete(data._id)} //passa com arrow function pq só quer q executa qdo der o clique com evento onclick
+                  />
                 </div>
               </div>
               <textarea 
