@@ -9,6 +9,7 @@ import api from "./services/api";
 import RadioButton from "./Components/RadioButton";
 
 function App() {
+  const [ selectedValue, setSelectedValue] = useState("all "); //qdo começar a aplicaçao vai estar setado todos
   const [title, setTitles] = useState("");
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([""]); //como esta manipulando info precisa criar dentro de um estado
@@ -23,6 +24,15 @@ function App() {
 async function getAllNotes() {
   const response = await api.get("/annotations");
   setAllNotes(response.data);
+}
+
+async function loadNotes(option) {
+  const params = {priority: oprion}
+  const response = await api.get('./priorities', { params });
+
+  if (response){
+    setAllNotes(response.data);
+  }
 }
 
   async function handleDelete(id){
