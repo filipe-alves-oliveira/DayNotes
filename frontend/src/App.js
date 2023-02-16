@@ -38,7 +38,7 @@ async function loadNotes(option) { //pegar o option q vai ser true ou false, ou 
 }
 
 async function handleChange(e) { //e-componente, tag, button q será alterado.
-  setSelectedValue(e.value);
+  setSelectedValue(e.value); //selecionando prioridade mudando para true
 
   if (e.checked && e.value !== 'all'){
     loadNotes(e.value); 
@@ -112,7 +112,10 @@ async function handleChange(e) { //e-componente, tag, button q será alterado.
           </div>
           <button id="btn_submit" type="submit">Salvar</button>
         </form>
-        <RadioButton />
+        <RadioButton 
+          selectedValue={selectedValue}
+          handleChange={handleChange}
+        />
       </aside>
       <main>
         <ul>

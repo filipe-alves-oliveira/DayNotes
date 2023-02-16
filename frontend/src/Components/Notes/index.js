@@ -24,7 +24,7 @@ function Notes({ data, handleDelete, handleChangePriority }) {
     if(changedNote && changedNote !== notes) {
       await api.post(`/contents/${data._id}`, {
       notes: changedNote,
-    })                                      //AULA 06 - 47:42MIN.
+    })                                      //>>>>>>>>>>>>>>>>>>>>>>AULA 06 - 01:11MIN.
   }
 }
 
