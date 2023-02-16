@@ -26,12 +26,24 @@ async function getAllNotes() {
   setAllNotes(response.data);
 }
 
-async function loadNotes(option) {
-  const params = {priority: oprion}
+async function loadNotes(option) { //pegar o option q vai ser true ou false, ou seja, prioridade ou normal
+  const params = {priority: option};
   const response = await api.get('./priorities', { params });
+  //loadNotes recebe option, true ou false, params ira pegar o objto só com priority true ou false, guardando dentro de params esse obj priority
+  //e dentro do get, params, só qro q retorne priority true ou false. (insomnia query params true ou false)
 
-  if (response){
+  if (response){  //se tiver tds true ou false, ele vai atualizar o setAllNotes(array do allnotes) com as infos.
     setAllNotes(response.data);
+  }
+}
+
+async function handleChange(e) { //e-componente, tag, button q será alterado.
+  setSelectedValue(e.value);
+
+  if (e.checked && e.value !== 'all'){
+    loadNotes(e.value); 
+  } else {
+    getAllNotes();
   }
 }
 
