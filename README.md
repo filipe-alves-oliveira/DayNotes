@@ -1,6 +1,6 @@
 # DayNotes
 
-Caderno de Anotaçoes de Notas e lembretes para o dia-a-dia - DayNotes
+Caderno de Anotações de Notas e lembretes para o dia-a-dia - DayNotes
 
 Banco de dados - MongoDb
 
