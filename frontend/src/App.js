@@ -56,9 +56,10 @@ async function handleChange(e) { //e-componente, tag, button q será alterado.
   }
 
   async function handleChangePriority(id){
-    const priorityNote = await api.post(`/priorities/${id}`);
-
-    if(priorityNote) {
+    const note = await api.post(`/priorities/${id}`);
+    if (note && selectedValue !== 'all') {
+      loadNotes(selectedValue);
+    } else if (note) {
       getAllNotes();
     }
   }
@@ -73,14 +74,19 @@ async function handleChange(e) { //e-componente, tag, button q será alterado.
     });
     setTitles("");
     setNotes("");
-    setAllNotes([...allNotes, response.data]) //setar de forma automatica a listagem de notas
-  }
 
+    if (selectedValue !== 'all'){
+      getAllNotes();
+    }else{
+      setAllNotes([...allNotes, response.data]); //setar de forma automatica a listagem de notas
+    }
+    setSelectedValue('all');
+}
   //botao salvar title, ou notes editado, usada somente em uma situacao especifica
   useEffect(() => {
     function enableSubmitButton() {
       let btn = document.getElementById("btn_submit")
-      btn.style.background = "#FFD3CA"
+        btn.style.background = "#FFD3CA"
       if(title && notes){
         btn.style.background = "#EB87A"
       }
